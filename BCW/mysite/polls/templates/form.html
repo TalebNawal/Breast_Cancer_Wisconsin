@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cancer Classification</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('{% static 'img/image1.jpg' %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+            transition: background-color 0.5s ease-in-out;
+        }
+
+        h1 {
+            color: #333333;
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            padding: 20px 30px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            margin-left: 100px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #808080;
+        }
+
+        .left-inputs {
+            flex: 1;
+        }
+
+        .right-inputs {
+            flex: 1;
+            margin-left: 100px;
+        }
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        p {
+            margin-top: 200px;
+            margin-left: 200px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #333333;
+            border: none;
+            padding: 10px;
+        }
+
+        .navbar__logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333333;
+            margin-left: 20px;
+        }
+
+        .navbar__icons {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 100px;
+        }
+
+        .navbar__icons--right {
+            margin-left: auto;
+        }
+
+        .navbar__icons--left {
+            margin-right: auto;
+        }
+
+        .navbar__icon {
+            margin-right: 10px;
+            color: #333333;
+            font-size: 24px;
+        }
+
+        .input-container {
+            display: flex;
+            margin-left: 200px;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="navbar">
+    <h1>Cancer Prediction</h1>
+    <div class="navbar__icons navbar__icons--right">
+        <a class="navbar__icon" href=""><img src="{% static 'icons/cancer.png' %}" alt="Form Icon"></a>
+    </div>
+</div>
+<p>Please fill in all the characteristics of the cancer cells</p>
+<form method="POST" action="{% url 'index' %}">
+    {% csrf_token %}
+    <div class="input-container">
+        <div class="left-inputs">
+            <div class="input-group">
+                <label for="patient">Patient:</label>
+                <input type="text" name="patient" id="patient" required class="center-input">
+            </div>
+            <div class="input-group">
+                <label for="radius_mean">Radius Mean:</label>
+                <input type="text" name="radius_mean" id="radius_mean" required>
+            </div>
+            <div class="input-group">
+                <label for="texture_mean">Texture Mean:</label>
+                <input type="text" name="texture_mean" id="texture_mean" required>
+            </div>
+            <div class="input-group">
+                <label for="smoothness_mean">Smoothness Mean:</label>
+                <input type="text" name="smoothness_mean" id="smoothness_mean" required>
+            </div>
+            <div class="input-group">
+                <label for="compactness_mean">Compactness Mean:</label>
+                <input type="text" name="compactness_mean" id="compactness_mean" required>
+            </div>
+            <div class="input-group">
+                <label for="symmetry_mean">Symmetry Mean:</label>
+                <input type="text" name="symmetry_mean" id="symmetry_mean" required>
+            </div>
+            <div class="input-group">
+                <label for="fractal_dimension_mean">Fractal Dimension Mean:</label>
+                <input type="text" name="fractal_dimension_mean" id="fractal_dimension_mean" required>
+            </div>
+        </div>
+        <div class="right-inputs">
+            <div class="input-group">
+                <label >
+                    <br><br><br>
+                </label>
+                <input type="hidden" >
+            </div>
+        <div class="right-inputs">
+            <div class="input-group">
+                <label for="radius_se">Radius SE:</label>
+                <input type="text" name="radius_se" id="radius_se" required>
+            </div>
+            <div class="input-group">
+                <label for="texture_se">Texture SE:</label>
+                <input type="text" name="texture_se" id="texture_se" required>
+            </div>
+            <div class="input-group">
+                <label for="smoothness_se">Smoothness SE:</label>
+                <input type="text" name="smoothness_se" id="smoothness_se" required>
+            </div>
+            <div class="input-group">
+                <label for="compactness_se">Compactness SE:</label>
+                <input type="text" name="compactness_se" id="compactness_se" required>
+            </div>
+            <div class="input-group">
+                <label for="symmetry_se">Symmetry SE:</label>
+                <input type="text" name="symmetry_se" id="symmetry_se" required>
+            </div>
+            <div class="input-group">
+                <label for="fractal_dimension_se">Fractal Dimension SE:</label>
+                <input type="text" name="fractal_dimension_se" id="fractal_dimension_se" required>
+            </div>
+            <div class="input-group">
+                <input type="submit" value="Classify">
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

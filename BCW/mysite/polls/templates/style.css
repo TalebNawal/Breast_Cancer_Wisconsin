@@ -1,0 +1,50 @@
+
+body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-image: url('{% static 'img/image1.jpg' %}');
+        background-repeat: no-repeat;
+        background-size: cover;
+        transition: background-color 0.5s ease-in-out;
+    }
+
+    h1 {
+        color: #333333;
+        text-align: center;
+    }
+
+    form {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between; /* Added property */
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+        width: 150px; /* Adjusted width */
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+    }
+
+    input#radius_mean {
+        width: 150px;
+    }
+
+    input[type="submit"] {
+        padding: 8px 15px;
+        font-size: 16px;
+        background-color: #4caf50;
+        color: #ffffff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }

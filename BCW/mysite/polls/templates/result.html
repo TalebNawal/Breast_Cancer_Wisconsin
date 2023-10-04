@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Classification Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('{% static 'img/image1.jpg' %}');
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333333;
+            text-align: center;
+        }
+
+        .report-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .report-container p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .report-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .report-container table td,
+        .report-container table th {
+            border: 1px solid #cccccc;
+            padding: 8px;
+        }
+
+        .report-container table th {
+            background-color: #f2f2f2;
+            text-align: left;
+        }
+
+        .download-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        p {
+            text-align: center;
+            font-weight: bold;
+            font-size: 50px;
+        }
+
+        .download-link a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .prediction-malignant {
+            color: red;
+        }
+
+        .prediction-benign {
+            color: green;
+        }
+
+        .download-link a:hover {
+            background-color: #45a049;
+        }
+        .download-link button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.download-link button:hover {
+    background-color: #808080;
+}
+
+    </style>
+</head>
+<body>
+<form method="POST" action="{% url 'generate_pdf' %}">
+
+
+    <div class="report-container">
+        <h1>Classification Report</h1>
+       <h2>Patient number {{patient}}</h2>
+        <table>
+            <tr>
+                <th>Input Field</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Radius Mean</td>
+                <td>{{ radius_mean }}</td>
+            </tr>
+            <tr>
+                <td>Texture Mean</td>
+                <td>{{ texture_mean }}</td>
+            </tr>
+            <tr>
+                <td>Smoothness Mean</td>
+                <td>{{ smoothness_mean }}</td>
+            </tr>
+            <tr>
+                <td>Compactness Mean</td>
+                <td>{{ compactness_mean }}</td>
+            </tr>
+            <tr>
+                <td>Symmetry Mean</td>
+                <td>{{ symmetry_mean }}</td>
+            </tr>
+            <tr>
+                <td>Fractal Dimension Mean</td>
+                <td>{{ fractal_dimension_mean }}</td>
+            </tr>
+            <tr>
+                <td>Radius SE</td>
+                <td>{{ radius_se }}</td>
+            </tr>
+            <tr>
+                <td>Texture SE</td>
+                <td>{{ texture_se }}</td>
+            </tr>
+            <tr>
+                <td>Smoothness SE</td>
+                <td>{{ smoothness_se }}</td>
+            </tr>
+            <tr>
+                <td>Compactness SE</td>
+                <td>{{ compactness_se }}</td>
+            </tr>
+            <tr>
+                <td>Symmetry SE</td>
+                <td>{{ symmetry_se }}</td>
+            </tr>
+            <tr>
+                <td>Fractal Dimension SE</td>
+                <td>{{ fractal_dimension_se }}</td>
+            </tr>
+        </table>
+
+        <p id="prediction">The prediction is: <span class="{% if prediction == 'Malignant' %}prediction-malignant{% else %}prediction-benign{% endif %}">{{ prediction }}</span></p>
+
+        <div class="download-link">
+            <button type="submit">Download Report</button>
+        </div>
+    </div>
+    {% csrf_token %}
+    <input type="hidden" name="radius_mean" value="{{ radius_mean }}">
+    <input type="hidden" name="texture_mean" value="{{ texture_mean }}">
+    <input type="hidden" name="smoothness_mean" value="{{ smoothness_mean }}">
+    <input type="hidden" name="compactness_mean" value="{{ compactness_mean }}">
+    <input type="hidden" name="symmetry_mean" value="{{ symmetry_mean }}">
+    <input type="hidden" name="fractal_dimension_mean" value="{{ fractal_dimension_mean }}">
+    <input type="hidden" name="radius_se" value="{{ radius_se }}">
+    <input type="hidden" name="texture_se" value="{{ texture_se }}">
+    <input type="hidden" name="smoothness_se" value="{{ smoothness_se }}">
+    <input type="hidden" name="compactness_se" value="{{ compactness_se }}">
+    <input type="hidden" name="symmetry_se" value="{{ symmetry_se }}">
+    <input type="hidden" name="fractal_dimension_se" value="{{ fractal_dimension_se }}">
+    <input type="hidden" name="patient" value="{{ patient }}">
+</form>
+</body>
+</html>
